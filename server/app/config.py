@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 
@@ -9,6 +10,11 @@ class Settings:
         "http://localhost:3001",
     ]
     DEBUG: bool = False
+
+    def __init__(self):
+        extra = os.getenv("CORS_ORIGINS", "")
+        if extra:
+            self.CORS_ORIGINS.extend([o.strip() for o in extra.split(",") if o.strip()])
 
 
 settings = Settings()

@@ -106,4 +106,34 @@ The FastAPI server will serve the built client from `client/dist/` on `:3001`.
 
 ---
 
-<small>Node modules (`node_modules/`) and the virtual environment (`venv/`) are gitignored, clone and repeat these steps on each machine.</small>
+## Deploy to Production (Vercel + Render)
+
+This setup uses **Vercel** for the frontend and **Render** for the backend — no cold-start on the frontend, one build pipeline each.
+
+### Render (backend)
+
+1. Push to GitHub
+2. Go to [render.com](https://render.com) → **New Web Service** → connect your repo
+3. Set:
+   - **Root Directory:** (leave blank — root of repo)
+   - **Build Command:** `pip install -r server/requirements.txt`
+   - **Start Command:** `./start.sh`
+   - **Python version:** 3.11
+4. Add Environment Variable:
+   - `CORS_ORIGINS` → `https://your-app.vercel.app` (add after Vercel is deployed)
+5. Deploy. Copy your Render URL (e.g. `https://worldcup-archive.onrender.com`)
+
+### Vercel (frontend)
+
+1. Go to [vercel.com](https://vercel.com) → **Import Project** → connect your repo
+2. Set:
+   - **Root Directory:** `client`
+   - **Framework Preset:** Vite
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+3. Deploy.
+4. Go back to Render and update `CORS_ORIGINS` with your Vercel URL.
+
+> Requests from Vercel to `/api/*` are proxied to Render via `client/vercel.json` — no code changes needed.
+
+<small>Node modules (`node_modules/`) and the virtual environment (`venv/`) are gitignored — clone and repeat these steps on each machine.</small>
