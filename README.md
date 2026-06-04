@@ -115,8 +115,8 @@ This setup uses **Cloudflare Pages** for the frontend and **Render** for the bac
 1. Push to GitHub
 2. Go to [render.com](https://render.com) → **New Web Service** → connect your repo
 3. Set:
-   - **Root Directory:** (leave blank — root of repo)
-   - **Build Command:** `pip install -r server/requirements.txt`
+   - **Root Directory:** `server`
+   - **Build Command:** `pip install -r requirements.txt`
    - **Start Command:** `./start.sh`
    - **Python version:** 3.11
 4. Add Environment Variable:
