@@ -106,9 +106,9 @@ The FastAPI server will serve the built client from `client/dist/` on `:3001`.
 
 ---
 
-## Deploy to Production (Vercel + Render)
+## Deploy to Production (Cloudflare Pages + Render)
 
-This setup uses **Vercel** for the frontend and **Render** for the backend — no cold-start on the frontend, one build pipeline each.
+This setup uses **Cloudflare Pages** for the frontend and **Render** for the backend — no cold-start on the frontend, one build pipeline each.
 
 ### Render (backend)
 
@@ -120,20 +120,21 @@ This setup uses **Vercel** for the frontend and **Render** for the backend — n
    - **Start Command:** `./start.sh`
    - **Python version:** 3.11
 4. Add Environment Variable:
-   - `CORS_ORIGINS` → `https://your-app.vercel.app` (add after Vercel is deployed)
+   - `CORS_ORIGINS` → `https://your-app.pages.dev` (add after Cloudflare is deployed)
 5. Deploy. Copy your Render URL (e.g. `https://worldcup-archive.onrender.com`)
 
-### Vercel (frontend)
+### Cloudflare Pages (frontend)
 
-1. Go to [vercel.com](https://vercel.com) → **Import Project** → connect your repo
-2. Set:
-   - **Root Directory:** `client`
-   - **Framework Preset:** Vite
-   - **Build Command:** `npm run build`
-   - **Output Directory:** `dist`
+1. Go to [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** → **Pages** → **Connect to Git**
+2. Connect your repo and set:
+   - **Project name:** `worldcup-archive`
+   - **Framework preset:** Vite
+   - **Root directory:** `client`
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
 3. Deploy.
-4. Go back to Render and update `CORS_ORIGINS` with your Vercel URL.
+4. Go back to Render and update `CORS_ORIGINS` with your `*.pages.dev` URL.
 
-> Requests from Vercel to `/api/*` are proxied to Render via `client/vercel.json` — no code changes needed.
+> Requests from Cloudflare to `/api/*` are proxied to Render via `client/_redirects` — no code changes needed.
 
 <small>Node modules (`node_modules/`) and the virtual environment (`venv/`) are gitignored — clone and repeat these steps on each machine.</small>
