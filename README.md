@@ -1,6 +1,6 @@
 # World Cup Archive
 
-A full-stack web app for exploring FIFA World Cup history — tournaments, matches, teams, and iconic moments with embedded YouTube highlights.
+A full-stack web app for exploring FIFA World Cup history: Tournaments, matches, teams, and iconic moments with embedded YouTube highlights.
 
 ## Tech Stack
 
@@ -106,4 +106,4 @@ The FastAPI server will serve the built client from `client/dist/` on `:3001`.
 
 ---
 
-<small>Node modules (`node_modules/`) and the virtual environment (`venv/`) are gitignored — clone and repeat these steps on each machine.</small>
+<small>Node modules (`node_modules/`) and the virtual environment (`venv/`) are gitignored, clone and repeat these steps on each machine.</small>
